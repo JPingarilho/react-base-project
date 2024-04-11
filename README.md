@@ -1,6 +1,6 @@
-# React Base Project
+# React Base Project Dosimagem
 
-Esse é um projeto de uma aplicação base usando React e Firebase construído com motivações didáticas.
+Esse é um projeto baseado no arquivo do Professor Eduardo Mangelli de uma aplicação base usando React e Firebase. Modificaremos para podermos adequalo ao Projeto Dosimagem
 
 
 ## Dependências
@@ -11,9 +11,7 @@ Esse é um projeto de uma aplicação base usando React e Firebase construído c
 
 ## Instalação
 
-1. Faça um fork do repositório em sua conta no gitlab, github, ou outro serviço semelhante que use o git como ferramente de versionamento; 
-2. Clone o seu novo repositório para fazer as modificações necessárias ao seu projeto em sua máquina local;
-3. Execute o comando `npm install` no diretório raiz do projeto para instalar os módulos e bibliotecas necessários para o projeto
+1. Execute o comando `npm install` no diretório raiz do projeto para instalar os módulos e bibliotecas necessários para o projeto
 
 ## Execução
 
@@ -25,3 +23,10 @@ O comando de execução local do projeto de ver executado no diretório raiz e d
 ## Versão de Produção
 
 Utilize o comando `npm run build` para construir uma versão pronta para produção. Os arquivos dessa versão estarão disponíveis na pasta *build*.
+
+## Site de Organização do Projeto
+
+- (Trello)[https://trello.com/b/G2xkDTo7/meu-quadro-do-trello]
+## Documentação do Projeto
+
+-(Documentação)[https://github.com/marceufilho/projeto_front_end/tree/AP1]
