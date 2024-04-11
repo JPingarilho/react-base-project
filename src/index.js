@@ -4,12 +4,12 @@ import { createRoot } from "react-dom/client";
 
 import Home from "./pages/Home";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Fotos from "./pages/Fotos";
-import Login from "./pages/Login";
-import Logout from "./pages/Logout";
 import { auth } from "./config/Firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import Atletas from "./pages/Atletas";
+import Buscador from "./pages/Buscador";
+import Calibragem from "./pages/Calibragem";
+import DownloadPacientes from "./pages/DownloadPacientes";
+import Relatorio from "./pages/Relatorio";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -27,10 +27,11 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home/>} />
-        <Route path="/fotos" element={<Fotos/>} />
-        <Route path="/atletas" element={<Atletas/>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/logout" element={<Logout/>} />
+        <Route path="/buscador" element={<Buscador/>} />
+        <Route path="/calibragem" element={<Calibragem/>} />
+        <Route path="/downloadpacientes" element={<DownloadPacientes/>} />
+        <Route path="/relatorio" element={<Relatorio/>} />
+        
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
