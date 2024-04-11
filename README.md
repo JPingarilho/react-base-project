@@ -26,7 +26,7 @@ Utilize o comando `npm run build` para construir uma versão pronta para produç
 
 ## Site de Organização do Projeto
 
-- [Trello](https://trello.com/b/G2xkDTo7/meu-quadro-do-trello)
+- [Trello](https://trello.com/b/zCc8e2ry/ap1)
 ## Documentação do Projeto
 
 - [Documentação](https://github.com/marceufilho/projeto_front_end/tree/AP1)
