@@ -4,7 +4,7 @@ import { getAll, getElenco } from "../services/AtletasBotafogo";
 import AtletaCard from "../components/AtletaCard/AtletaCard";
 import ListContainer from "../components/ListContainer/ListContainer";
 
-const Atletas = () => {
+const Calibragem = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [erro, setErro] = useState(null);
@@ -50,4 +50,4 @@ const Atletas = () => {
   )
 }
 
-export default Atletas;
+export default Calibragem;
