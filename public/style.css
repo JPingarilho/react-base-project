@@ -6,10 +6,10 @@
   /* CSS HSL */
   /* https://coolors.co/ */
 
-  --primaria: hsla(210, 67%, 43%, 1);
-  --background: hsla(108, 22%, 87%, 1);
+  --primaria: #0d6efd;
+  --background: #FFFFFF;
   --secundaria: hsla(34, 100%, 50%, 1);
-  --destaque: hsla(355, 78%, 56%, 1);
+  --destaque:#043454;
   --detalhe: hsla(9, 63%, 45%, 1);
 
 
