@@ -1,11 +1,14 @@
 import Base from "./Base";
+import SearchParams from "../components/Buscador/Buscador"
 
 const Buscador = () =>{
     return(
         <Base>
-            <h1>Buscador</h1>
+        <SearchParams>
+            
+        </SearchParams>
         </Base>
     );
 
-}
+};
 export default Buscador

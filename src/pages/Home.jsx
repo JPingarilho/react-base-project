@@ -19,7 +19,7 @@ const Home = () => {
   return (
     <Base>
       <h1>
-     Aplicação React Base
+     Bem vindo a pagina principal
       </h1>
     </Base>
   )
