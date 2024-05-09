@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Top } from "./Style";
 
 const Header = () => (
-  <Top>
+<Top>
     <Link to="/">Home</Link>
     <Link to="/buscador">Buscador</Link>
     <Link to="/calibragem">Calibragem</Link>
