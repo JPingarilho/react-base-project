@@ -1,11 +1,16 @@
 import Base from "./Base";
+import DownloadsPendentes from "../components/Pacientes/Pacientes.jsx"
+import App from "../components/Pacientes/Pacientes.jsx";
 
-const DownloadPacientes = () =>{
+const Pacientes = () =>{
     return(
         <Base>
-            <h1>DownloadPacientes</h1>
+        <App>
+            
+        </App>
         </Base>
+
     );
 
 }
-export default DownloadPacientes
+export default Pacientes
