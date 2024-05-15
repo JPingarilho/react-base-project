@@ -3,6 +3,7 @@ import {
   AppContainer,
   SearchBarContainer,
   DownloadsContainer,
+  SectionContainer,
   DownloadsList,
   DownloadItem,
   DownloadButton,
@@ -27,9 +28,9 @@ const SearchBar = ({ onSearch }) => {
         type="text"
         value={searchTerm}
         onChange={handleChange}
-        placeholder="Buscar..."
+        placeholder="Digite o nome completo do paciente..."
       />
-      <button type="submit">Buscar</button>
+      <DownloadButton type="submit">Buscar</DownloadButton>
     </form>
   );
 };
@@ -69,7 +70,7 @@ const App = () => {
         <SearchBar onSearch={handleSearch} />
       </SearchBarContainer>
       <DownloadsContainer>
-        <div>
+        <SectionContainer>
           <h2>Downloads Pendentes</h2>
           <DownloadsList>
             {pendingDownloads.map((download) => (
@@ -79,8 +80,8 @@ const App = () => {
               </DownloadItem>
             ))}
           </DownloadsList>
-        </div>
-        <div>
+        </SectionContainer>
+        <SectionContainer>
           <h2>Downloads Finalizados</h2>
           <DownloadsList>
             {finalizedDownloads.map((download) => (
@@ -90,7 +91,7 @@ const App = () => {
               </DownloadItem>
             ))}
           </DownloadsList>
-        </div>
+        </SectionContainer>
       </DownloadsContainer>
       {searchResult && searchResult.type === 'notFound' && (
         <div>
