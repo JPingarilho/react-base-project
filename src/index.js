@@ -9,7 +9,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import Buscador from "./pages/Buscador";
 import Calibragem from "./pages/Calibragem";
 import DownloadPacientes from "./pages/DownloadPacientes";
-import Relatorio from "./pages/Relatorio";
+import Relatorio from "./components/Relatorios/relatorio";
+import RelatorioPage from "./pages/RelatorioPage";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -30,7 +31,7 @@ root.render(
         <Route path="/buscador" element={<Buscador/>} />
         <Route path="/calibragem" element={<Calibragem/>} />
         <Route path="/downloadpacientes" element={<DownloadPacientes/>} />
-        <Route path="/relatorio" element={<Relatorio/>} />
+        <Route path="/relatorio" element={<RelatorioPage/>} />
         
       </Routes>
     </BrowserRouter>
