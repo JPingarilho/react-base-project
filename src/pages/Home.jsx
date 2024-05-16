@@ -18,10 +18,36 @@ const Home = () => {
 
   return (
     <Base>
-      <h1>
-     Bem vindo a pagina principal
-      </h1>
-    </Base>
+        <div className="pesquisa-container">
+          <input type="text" placeholder="Digite o nome da empresa" />
+        </div>
+        <div className="preciso-container">
+          <div className="pendenetes">
+            <h2>Pendentes</h2>
+            <div className="empresa">
+              Empresa <button>Iniciar</button>
+            </div>
+          </div>
+          <div className="pendenetes">
+            <h2>Calibragem</h2>
+            <div className="empresa">
+              Empresa <button>Iniciar</button>
+            </div>
+          </div>
+          <div className="pendenetes">
+            <h2>Download pacientes</h2>
+            <div className="empresa">
+              Empresa <button>Iniciar</button>
+            </div>
+          </div>
+          <div className="pendenetes">
+            <h2>Anexo Relatorio</h2>
+            <div className="empresa">
+              Empresa <button>Iniciar</button>
+            </div>
+          </div>
+        </div>
+    </Base>
   )
 }
 
