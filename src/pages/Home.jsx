@@ -3,18 +3,23 @@ import Base from "./Base"
 import { auth } from "../config/Firebase";
 import { useEffect } from "react";
 
-const Home = () => {
+import React, { useState } from 'react';
+import './relatorio.css'; 
 
-  /* useEffect(()=> {
-    onAuthStateChanged(auth, (user)=> {
-      if (user) {
-        window.sessionStorage.setItem("accessToken", user.accessToken);
-      } else {
-        window.sessionStorage.removeItem("accessToken");
-      }
-    })
-  },[]) */
-  
+const App = () => {
+  const [nomePaciente, setNomePaciente] = useState('');
+  const [tipoRelatorio, setTipoRelatorio] = useState('');
+  const [relatorio, setRelatorio] = useState(null);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('nomePaciente', nomePaciente);
+    formData.append('tipoRelatorio', tipoRelatorio);
+    formData.append('relatorio', relatorio);
+
+  };
 
   return (
     <Base>
