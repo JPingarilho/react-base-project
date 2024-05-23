@@ -8,21 +8,23 @@ export const AppContainer = styled.article`
 
 export const SearchBarContainer = styled.div`
   margin-bottom: 20px;
+  position: relative; /* Adicionando posição relativa para o SearchBarContainer */
 `;
 
 export const DownloadsContainer = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   margin-top: 20px;
 `;
 
 export const SectionContainer = styled.div`
-  width: 45%;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px; /* Adição de margem inferior */
+  width: 90%;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 35px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  border: 1px solid #e3e3e3;
 `;
 
 export const DownloadsList = styled.ul`
@@ -45,7 +47,7 @@ export const DownloadButton = styled.button`
   color: #fff;
   border: none;
   border-radius: 5px;
-  padding: 5px 10px;
+  padding: 10px 20px;
   cursor: pointer;
   &:hover {
     background-color: #0056b3;
@@ -54,9 +56,16 @@ export const DownloadButton = styled.button`
 
 export const StyledInput = styled.input`
   padding: 10px;
-  margin-right: 10px;
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
   border-radius: 5px;
-  width: calc(100% - 90px);
+  width: 100%;
   box-sizing: border-box;
+`;
+
+export const SearchButton = styled(DownloadButton)` // Definindo SearchButton como DownloadButton
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10px 20px; /* Adicionando padding ao botão */
 `;

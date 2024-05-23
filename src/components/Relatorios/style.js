@@ -1,24 +1,20 @@
 import styled from "styled-components";
 
-
 const FormContainer = styled.div`
-  width: 80%;
-  max-width: 600px;
-  margin: 50px auto;
-  padding: 30px;
+  width: 100%;
+  max-width: 1000px;
+  margin: 50px auto; /* Reduzi a margem superior para 50px */
+  padding: 40px;
   border: 1px solid #e3e3e3;
-  border-radius: 10px;
+  border-radius: 35px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
-
-  @media (min-width: 768px) {
-    padding: 40px;
-  }
 `;
 
 const Label = styled.label`
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
+  margin-top: 7px;
   font-size: 1rem;
   font-weight: bold;
   color: #333;
@@ -28,6 +24,7 @@ const Input = styled.input`
   width: 100%;
   padding: 12px;
   margin-bottom: 20px;
+  margin-top: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
@@ -40,10 +37,10 @@ const Input = styled.input`
   }
 `;
 
-
 const Button = styled.button`
   width: 100%;
   padding: 14px;
+  margin-top: 40px;
   background-color: #007bff;
   color: #fff;
   border: none;
