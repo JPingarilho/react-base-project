@@ -1,5 +1,7 @@
 import React from 'react';
 import { ContainerBuscador, ContainerKanban } from './Style';
+import { useNavigate } from 'react-router-dom';
+
 
 const COMPANIES = {
     "copa dor": {
@@ -31,17 +33,31 @@ const COMPANIES = {
 
 const Kanban = () => {
     const statuses = ['backlog', 'calibragem', 'relatório', 'finalizado'];
+    const navigate = useNavigate();
 
     const companiesByStatus = statuses.reduce((acc, status) => {
         acc[status] = Object.values(COMPANIES).filter(company => company.status === status);
         return acc;
     }, {});
 
+    const handleColumnClick = (status) => {
+        const paths = {
+            'calibragem': '/calibragem',
+            'relatório': '/relatorio',
+        };
+        navigate(paths[status]);
+    };
+
     return (
         <ContainerKanban>
             <div className="kanban-board">
                 {statuses.map((status) => (
-                    <div key={status} className="kanban-column">
+                    <div 
+                        key={status}
+                        className="kanban-column"
+                        onClick={() => handleColumnClick(status)}
+                        
+                        >
                         <h2>{status.toUpperCase()}</h2>
                         {companiesByStatus[status].map((company) => (
                             <div key={company.nome} className="kanban-task">
