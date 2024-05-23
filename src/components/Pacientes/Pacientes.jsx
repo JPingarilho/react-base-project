@@ -61,7 +61,7 @@ const App = () => {
   const [view, setView] = useState('home'); // Estado para controlar a visualização
 
   const handleSearch = (searchTerm) => {
-    const found = pendingDownloads.find(download => download.paciente.toLowerCase() === searchTerm.toLowerCase());
+    const found = empresasCadastradas.find(empresa => empresa.empresa.toLowerCase() === searchTerm.toLowerCase());
     if (found) {
       setSearchResult({ data: found });
     } else {
@@ -140,9 +140,9 @@ const App = () => {
           )}
           {searchResult && searchResult.type !== 'notFound' && (
             <div>
-              <h2>Resultado da Busca</h2>
+              <h2>Resultado da Busca:</h2>
               <DownloadItem>
-                <span>{searchResult.data.paciente}</span>
+                <span>{searchResult.data.empresa}</span>
                 <DownloadButton onClick={handleVisualizar}>Visualizar</DownloadButton>
               </DownloadItem>
             </div>
