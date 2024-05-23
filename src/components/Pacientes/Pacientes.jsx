@@ -23,19 +23,28 @@ const SearchBar = ({ onSearch }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <StyledInput
-        type="text"
-        value={searchTerm}
-        onChange={handleChange}
-        placeholder="Digite o nome completo do paciente..."
-      />
-      <DownloadButton type="submit">Buscar</DownloadButton>
-    </form>
+    <SearchBarContainer>
+      <form onSubmit={handleSubmit} style={{ display: 'flex', alignItems: 'center' }}>
+        <StyledInput
+          type="text"
+          value={searchTerm}
+          onChange={handleChange}
+          placeholder="Digite o nome da empresa..."
+          style={{ marginRight: '10px' }}
+        />
+        <DownloadButton type="submit">Buscar</DownloadButton>
+      </form>
+    </SearchBarContainer>
   );
 };
 
 const App = () => {
+  const empresasCadastradas = [
+    { id: 1, empresa: 'Empresa 1' },
+    { id: 2, empresa: 'Empresa 2' },
+    { id: 3, empresa: 'Empresa 3' },
+  ];
+
   const pendingDownloads = [
     { id: 1, paciente: 'Paciente 1' },
     { id: 2, paciente: 'Paciente 2' },
@@ -49,67 +58,96 @@ const App = () => {
   ];
 
   const [searchResult, setSearchResult] = useState(null);
+  const [view, setView] = useState('home'); // Estado para controlar a visualização
 
   const handleSearch = (searchTerm) => {
-    const foundInPending = pendingDownloads.find(download => download.paciente.toLowerCase() === searchTerm.toLowerCase());
-    const foundInFinalized = finalizedDownloads.find(download => download.paciente.toLowerCase() === searchTerm.toLowerCase());
-
-    if (foundInPending) {
-      setSearchResult({ type: 'pending', data: foundInPending });
-    } else if (foundInFinalized) {
-      setSearchResult({ type: 'finalized', data: foundInFinalized });
+    const found = pendingDownloads.find(download => download.paciente.toLowerCase() === searchTerm.toLowerCase());
+    if (found) {
+      setSearchResult({ data: found });
     } else {
       setSearchResult({ type: 'notFound' });
     }
+    setView('results'); // Muda a visualização para resultados
+  };
+
+  const handleVisualizar = () => {
+    setView('downloads');
+  };
+
+  const handleVoltar = () => {
+    setView('home');
   };
 
   return (
     <AppContainer>
-      <h1>Download de Pacientes</h1>
-      <SearchBarContainer>
-        <SearchBar onSearch={handleSearch} />
-      </SearchBarContainer>
-      <DownloadsContainer>
-        <SectionContainer>
-          <h2>Downloads Pendentes</h2>
-          <DownloadsList>
-            {pendingDownloads.map((download) => (
-              <DownloadItem key={download.id}>
-                <span>{download.paciente}</span>
-                <DownloadButton>Iniciar</DownloadButton>
-              </DownloadItem>
-            ))}
-          </DownloadsList>
-        </SectionContainer>
-        <SectionContainer>
-          <h2>Downloads Finalizados</h2>
-          <DownloadsList>
-            {finalizedDownloads.map((download) => (
-              <DownloadItem key={download.id}>
-                <span>{download.paciente}</span>
-                <DownloadButton>Visualizar</DownloadButton>
-              </DownloadItem>
-            ))}
-          </DownloadsList>
-        </SectionContainer>
-      </DownloadsContainer>
-      {searchResult && searchResult.type === 'notFound' && (
-        <div>
-          <h2>Paciente não encontrado</h2>
-        </div>
+      {view === 'home' && (
+        <>
+          <h1></h1>
+          <SearchBar onSearch={handleSearch} />
+          <DownloadsContainer>
+            <SectionContainer>
+              <h2>Empresas Cadastradas</h2>
+              <DownloadsList>
+                {empresasCadastradas.map((empresa) => (
+                  <DownloadItem key={empresa.id}>
+                    <span>{empresa.empresa}</span>
+                    <DownloadButton onClick={handleVisualizar}>Visualizar</DownloadButton>
+                  </DownloadItem>
+                ))}
+              </DownloadsList>
+            </SectionContainer>
+          </DownloadsContainer>
+        </>
       )}
-      {searchResult && searchResult.type !== 'notFound' && (
-        <div>
-          <h2>Resultado da Busca</h2>
-          <DownloadItem>
-            <span>{searchResult.data.paciente}</span>
-            {searchResult.type === 'pending' ? (
-              <DownloadButton>Iniciar</DownloadButton>
-            ) : (
-              <DownloadButton>Visualizar</DownloadButton>
-            )}
-          </DownloadItem>
-        </div>
+      {view === 'downloads' && (
+        <>
+          <h1>Downloads Pacientes</h1>
+          <DownloadsContainer>
+            <SectionContainer>
+              <h2>Downloads Pendentes</h2>
+              <DownloadsList>
+                {pendingDownloads.map((download) => (
+                  <DownloadItem key={download.id}>
+                    <span>{download.paciente}</span>
+                    <DownloadButton>Iniciar</DownloadButton>
+                  </DownloadItem>
+                ))}
+              </DownloadsList>
+            </SectionContainer>
+            <SectionContainer>
+              <h2>Downloads Finalizados</h2>
+              <DownloadsList>
+                {finalizedDownloads.map((download) => (
+                  <DownloadItem key={download.id}>
+                    <span>{download.paciente}</span>
+                    <DownloadButton>Iniciar</DownloadButton>
+                  </DownloadItem>
+                ))}
+              </DownloadsList>
+            </SectionContainer>
+          </DownloadsContainer>
+          <DownloadButton onClick={handleVoltar}>Voltar</DownloadButton>
+        </>
+      )}
+      {view === 'results' && (
+        <>
+          <SearchBar onSearch={handleSearch} />
+          <DownloadButton onClick={handleVoltar}>Voltar</DownloadButton>
+          {searchResult && searchResult.type === 'notFound' && (
+            <div>
+              <h2>Empresa não encontrada</h2>
+            </div>
+          )}
+          {searchResult && searchResult.type !== 'notFound' && (
+            <div>
+              <h2>Resultado da Busca</h2>
+              <DownloadItem>
+                <span>{searchResult.data.paciente}</span>
+                <DownloadButton onClick={handleVisualizar}>Visualizar</DownloadButton>
+              </DownloadItem>
+            </div>
+          )}
+        </>
       )}
     </AppContainer>
   );
