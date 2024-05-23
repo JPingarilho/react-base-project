@@ -43,7 +43,7 @@ export const DownloadItem = styled.li`
 `;
 
 export const DownloadButton = styled.button`
-  background-color: #007bff;
+  background-color: var(--primaria);
   color: #fff;
   border: none;
   border-radius: 5px;

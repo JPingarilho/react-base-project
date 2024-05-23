@@ -41,7 +41,7 @@ const Button = styled.button`
   width: 100%;
   padding: 14px;
   margin-top: 40px;
-  background-color: #007bff;
+  background-color: var(--primaria);
   color: #fff;
   border: none;
   border-radius: 5px;

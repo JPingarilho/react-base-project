@@ -42,7 +42,7 @@ export const style = {
     button: {
       padding: '8px 15px',
       borderRadius: '5px',
-      backgroundColor: '#007bff',
+      backgroundColor: '#052c65',
       color: '#fff',
       border: 'none',
       cursor: 'pointer',
@@ -65,7 +65,7 @@ export const style = {
     searchButton: {
       padding: '8px 15px',
       borderRadius: '5px',
-      backgroundColor: '#007bff',
+      backgroundColor: '#052c65',
       color: '#fff',
       border: 'none',
       cursor: 'pointer',
