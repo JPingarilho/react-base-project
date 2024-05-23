@@ -18,12 +18,13 @@ export const DownloadsContainer = styled.div`
 `;
 
 export const SectionContainer = styled.div`
-  width: 70%;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 35px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
+  border: 1px solid #e3e3e3;
 `;
 
 export const DownloadsList = styled.ul`
@@ -55,7 +56,7 @@ export const DownloadButton = styled.button`
 
 export const StyledInput = styled.input`
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
   border-radius: 5px;
   width: 100%;
   box-sizing: border-box;

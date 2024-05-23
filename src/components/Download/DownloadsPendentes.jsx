@@ -24,7 +24,7 @@ const DownloadsPendentes = () => {
     <div>
       <h1 style={{ textAlign: 'center', marginTop: '20px', marginBottom: '20px' }}>Download de Calibragem</h1>
       <div className="pesquisa" style={style.pesquisa}>
-        <input type="text" placeholder="Pesquisar empresa" style={style.searchBar} />
+        <input type="text" placeholder="Digite o nome da empresa..." style={style.searchBar} />
         <button style={style.searchButton} onClick={pesquisar}>Pesquisar</button>
       </div>
       <div className="downloads-pendentes" style={style.container}>

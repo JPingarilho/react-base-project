@@ -1,10 +1,10 @@
 export const style = {
     container: {
-      padding: '10px',
+      padding: '40px',
       backgroundColor: '#f9f9f9',
-      borderRadius: '10px',
+      borderRadius: '35px',
       marginBottom: '20px',
-      boxShadow: '0 0 0px rgba(0, 0, 0, 0.3)',
+      boxShadow: '0 0 20px rgba(0, 0, 0, 0.3)',
     },
     title: {
       textAlign: 'center',
