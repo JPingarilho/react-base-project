@@ -1,35 +1,35 @@
 import styled from "styled-components";
 
-const ContainerBuscador =  styled.article`
-.search-params {
+const ContainerBuscador = styled.article`
+  .search-params {
     width: 1100px;
     margin: 0 auto;
   }
-  
+
   .search-params form {
     border-radius: 6px;
-    background: #ffffff;
+    background: var(--background);
     box-shadow: 0px 0px 12px #aaa, -0px -0px 12px #fff;
     width: 360px;
-    margin: 0px 25px 0px 0px;
+    margin: 0 auto; /* Center the form */
     padding: 35px 15px 15px 15px;
-    float: left;
   }
+
   .search-params label {
     display: block;
     width: 60px;
   }
-  
+
   .search-params input {
     margin-bottom: 30px;
     font-size: 18px;
     height: 30px;
     width: 325px;
   }
-  
+
   .search-params button,
   .details button {
-    background-color: #246eb7;
+    background-color: var(--primaria);
     padding: 5px 25px;
     color: white;
     font-size: 18px;
@@ -39,10 +39,11 @@ const ContainerBuscador =  styled.article`
     margin: 0 auto;
     cursor: pointer;
   }
+
   table {
     width: 325px;
     border-collapse: collapse;
-    margin-top: 10px;
+    margin: 10px auto; 
   }
 
   th,
@@ -53,7 +54,13 @@ const ContainerBuscador =  styled.article`
   }
 
   th {
-    background-color: #ffffff;
+    background-color: var(--background);
   }
-`
- export{ContainerBuscador}
+
+  p {
+    text-align: center; 
+    margin-top: 10px;
+  }
+`;
+
+export { ContainerBuscador };
