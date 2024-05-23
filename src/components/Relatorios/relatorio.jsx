@@ -20,7 +20,7 @@ const Relatorio = () => {
       <h1>Anexar Relatório Médico</h1>
 
       <form onSubmit={handleSubmit}>
-        <Label>Nome do Paciente:</Label>
+        <Label>Nome da Empresa:</Label>
         <Input type="text" value={nomePaciente} onChange={(e) => setNomePaciente(e.target.value)} />
 
         <Label>Tipo de Relatório:</Label>

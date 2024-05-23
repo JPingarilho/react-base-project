@@ -6,7 +6,7 @@ const Header = () => (
     <Link to="/">Home</Link>
     <Link to="/buscador">Buscador</Link>
     <Link to="/calibragem">Calibragem</Link>
-    <Link to="/downloadpacientes">Pacientes</Link>
+    <Link to="/downloadpacientes">Empresas</Link>
     <Link to="/relatorio">Relatorio</Link>
     
      {/* { window.sessionStorage.getItem('accessToken')
