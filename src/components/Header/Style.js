@@ -5,6 +5,7 @@ const Top = styled.header`
   background-color: var(--primaria);
   display: flex;
   flex-direction: row;
+  justify-content: center;
   margin: 0;
   a {
     text-align: center;
@@ -16,6 +17,7 @@ const Top = styled.header`
     font-weight: bold;
     color: var(--destaque);
     text-transform: uppercase;
+    border-radius: 5px;
     /*border-radius: .3em;*/
     &:hover{
       background-color: var(--primaria);

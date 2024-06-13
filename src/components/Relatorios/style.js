@@ -1,33 +1,57 @@
 import styled from "styled-components";
 
-
 const FormContainer = styled.div`
-  width: 380px;
-  border: 0px solid #ccc;
-  padding:300px;
-  border-radius: 5px;
+  width: 100%;
+  max-width: 1000px;
+  margin: 50px auto; /* Reduzi a margem superior para 50px */
+  padding: 40px;
+  border: 1px solid #e3e3e3;
+  border-radius: 35px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
 `;
 
 const Label = styled.label`
   display: block;
-  margin-bottom: 13px;
+  margin-bottom: 5px;
+  margin-top: 7px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
 `;
-
 
 const Input = styled.input`
   width: 100%;
-  padding: 7px;
+  padding: 12px;
+  margin-bottom: 20px;
+  margin-top: 20px;
   border: 1px solid #ccc;
-  border-radius: 3px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+
+  &:focus {
+    border-color: #007bff;
+    outline: none;
+  }
 `;
 
 const Button = styled.button`
-  background-color: #007bff;
+  width: 100%;
+  padding: 14px;
+  margin-top: 40px;
+  background-color: var(--primaria);
   color: #fff;
-  padding: 10px 20px;
   border: none;
-  border-radius: 7px;
+  border-radius: 5px;
+  font-size: 1.125rem;
   cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #0056b3;
+  }
 `;
 
 export { FormContainer, Label, Input, Button };

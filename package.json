@@ -1,9 +1,13 @@
 {
-  "name": "um-react",
-  "version": "1.0.0",
+  "name" : "balança mas não cai",
+  "homepage": "https://jpingarilho.github.io/react-base-project/",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
+  
   "scripts": {
+    "predeploy": "npm run build", 
+    "deploy": "gh-pages -d dist", 
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-windows": "SET PUBLIC_URL=/&& webpack serve --config ./webpack.config.js --mode development --port 3000",
     "start-linux": "PUBLIC_URL=/ webpack serve --config ./webpack.config.js --mode development --port 3000",
@@ -13,6 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "firebase": "^10.6.0",
+    "gh-pages": "^6.1.1",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.2.0",
