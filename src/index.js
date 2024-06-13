@@ -15,13 +15,13 @@ import RelatorioPage from "./pages/RelatorioPage";
 const container = document.getElementById("root");
 const root = createRoot(container);
 
-onAuthStateChanged(auth, (user)=> {
-  if (user) {
-    window.sessionStorage.setItem("accessToken", user.accessToken);
-  } else {
-    window.sessionStorage.removeItem("accessToken");
-  }
-});
+//onAuthStateChanged(auth, (user)=> {
+//  if (user) {
+//    window.sessionStorage.setItem("accessToken", user.accessToken);
+//  } else {
+//    window.sessionStorage.removeItem("accessToken");
+//  }
+//});
 
 root.render(
   <React.StrictMode>
