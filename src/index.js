@@ -3,7 +3,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 
 import Home from "./pages/Home";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {HashRouter, Route, Routes } from "react-router-dom";
 import { auth } from "./config/Firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import Buscador from "./pages/Buscador";
@@ -25,7 +25,7 @@ onAuthStateChanged(auth, (user)=> {
 
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="/buscador" element={<Buscador/>} />
@@ -34,6 +34,6 @@ root.render(
         <Route path="/relatorio" element={<RelatorioPage/>} />
         
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>
 );
