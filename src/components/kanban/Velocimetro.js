@@ -20,7 +20,7 @@ const BarContainer = styled.div`
 const CompletedBar = styled.div`
   width: ${(props) => props.percentage}%;
   height: 100%;
-  background: #2196f3; /* Azul para serviços concluídos */
+  background: #052c65; /* Azul para serviços concluídos */
 `;
 
 const RemainingBar = styled.div`
