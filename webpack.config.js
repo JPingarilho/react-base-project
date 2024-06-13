@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const package = require("./package.json")
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
@@ -28,7 +29,8 @@ module.exports = {
       ]
     }),
     new webpack.DefinePlugin({
-      'process.env': JSON.stringify(process.env)
+      'process.env': JSON.stringify(process.env),
+      'process.env.PUBLIC_URL': JSON.stringify(package.homepage)
     })
   ],
   devServer: {
