@@ -4,14 +4,13 @@
   "version": "0.1.0",
   "description": "",
   "main": "index.js",
-  
   "scripts": {
-    "build": "webpack --mode production",
-    "predeploy": "npm run build", 
-    "deploy": "gh-pages -d dist", 
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-windows": "SET PUBLIC_URL=/&& webpack serve --config ./webpack.config.js --mode development --port 3000",
-    "start-linux": "PUBLIC_URL=/ webpack serve --config ./webpack.config.js --mode development --port 3000"
+    "start-linux": "PUBLIC_URL=/ webpack serve --config ./webpack.config.js --mode development --port 3000",
+    "build": "webpack --mode production"
   },
   "author": "@EduardoMangeli",
   "license": "MIT",

@@ -1,43 +1,35 @@
-const webpack = require("webpack");
-const path = require("path");
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const webpack = require('webpack');
+const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  entry: path.resolve(__dirname, "./src/index.js"),
+  entry: path.resolve(__dirname, './src/index.js'),
   devtool: 'inline-source-map',
   output: {
-    filename: "bundle.js",
-    path: path.resolve(__dirname, "./dist",)
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, './dist')
   },
-
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: "babel-loader"
+        use: 'babel-loader'
       }
     ]
   },
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: ['.js', '.jsx']
   },
   plugins: [
-    new CopyWebpackPlugin(
-      {
-        patterns: [
-          {
-            from: 'public',
-            to: './'
-          }
-        ]
-      }
-    ),
-    new webpack.DefinePlugin(
-      {
-        "process.env": JSON.stringify(process.env)
-      }
-    )
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'public', to: './' }
+      ]
+    }),
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(process.env)
+    })
   ],
   devServer: {
     open: true,
