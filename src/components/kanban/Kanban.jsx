@@ -1,7 +1,7 @@
 import React from 'react';
-import { ContainerBuscador, ContainerKanban } from './Style';
+import { ContainerKanban } from './Style';
 import { useNavigate } from 'react-router-dom';
-
+import Velocimetro from "./Velocimetro.js"
 
 const COMPANIES = {
     "copa dor": {
@@ -48,6 +48,11 @@ const Kanban = () => {
         navigate(paths[status]);
     };
 
+    const getCurrentAndTotalPatients = (pacientes) => {
+        const [current, total] = pacientes.split('/').map(Number);
+        return { current, total };
+    };
+
     return (
         <ContainerKanban>
             <div className="kanban-board">
@@ -56,15 +61,18 @@ const Kanban = () => {
                         key={status}
                         className="kanban-column"
                         onClick={() => handleColumnClick(status)}
-                        
-                        >
+                    >
                         <h2>{status.toUpperCase()}</h2>
-                        {companiesByStatus[status].map((company) => (
-                            <div key={company.nome} className="kanban-task">
-                                <strong>{company.nome}</strong>
-                                <p>Pacientes: {company.pacientes}</p>
-                            </div>
-                        ))}
+                        {companiesByStatus[status].map((company) => {
+                            const { current, total } = getCurrentAndTotalPatients(company.pacientes);
+                            return (
+                                <div key={company.nome} className="kanban-task">
+                                    <strong>{company.nome}</strong>
+                                    <p>Pacientes: {company.pacientes}</p>
+                                    <Velocimetro total={total} current={current} />
+                                </div>
+                            );
+                        })}
                     </div>
                 ))}
             </div>
@@ -73,4 +81,3 @@ const Kanban = () => {
 };
 
 export default Kanban;
-
