@@ -1,84 +1,124 @@
-import React from 'react';
+// import React from 'react';
+// import { ContainerKanban } from './Style';
+// import { useNavigate } from 'react-router-dom';
+// import Velocimetro from "./Velocimetro.js"
+// import data from "../../data/clientes.json"
+// const Kanban = () => {
+//     const [companies, setCompanies] = useState([]);
+
+//     useEffect(() => {
+//         setCompanies(data);
+//     }, []);
+
+//     const statuses = ['backlog', 'calibragem', 'relatório', 'finalizado'];
+//     const navigate = useNavigate();
+
+//     const companiesByStatus = statuses.reduce((acc, status) => {
+//         acc[status] = companies.filter(company => company.status === status);
+//         return acc;
+//     }, {});
+
+//     const handleColumnClick = (status) => {
+//         const paths = {
+//             'calibragem': '/calibragem',
+//             'relatório': '/relatorio',
+//         };
+//         navigate(paths[status]);
+//     };
+
+//     const getCurrentAndTotalPatients = (pacientes) => {
+//         const [current, total] = pacientes.split('/').map(Number);
+//         return { current, total };
+//     };
+
+//     return (
+//         <ContainerKanban>
+//             <div className="kanban-board">
+//                 {statuses.map((status) => (
+//                     <div 
+//                         key={status}
+//                         className="kanban-column"
+//                         onClick={() => handleColumnClick(status)}
+//                     >
+//                         <h2>{status.toUpperCase()}</h2>
+//                         {companiesByStatus[status].map((company) => {
+//                             const { current, total } = getCurrentAndTotalPatients(company.pacientes);
+//                             return (
+//                                 <div key={company.nome} className="kanban-task">
+//                                     <strong>{company.nome}</strong>
+//                                     <p>Pacientes: {company.pacientes}</p>
+//                                     <Velocimetro total={total} current={current} />
+//                                 </div>
+//                             );
+//                         })}
+//                     </div>
+//                 ))}
+//             </div>
+//         </ContainerKanban>
+//     );
+// };
+
+// export default Kanban;
+import React, { useState, useEffect } from 'react';
 import { ContainerKanban } from './Style';
 import { useNavigate } from 'react-router-dom';
-import Velocimetro from "./Velocimetro.js"
-
-
-const COMPANIES = {
-    "copa dor": {
-        nome: "Copa D'Or",
-        status: "calibragem",
-        pacientes: "23/70"
-    },
-    "cdpi": {
-        nome: "CDPI",
-        status: "relatório",
-        pacientes: "52/80"
-    },
-    "barra dor": {
-        nome: "Barra D'Or",
-        status: "calibragem",
-        pacientes: "69/90"
-    },
-    "miguel couto": {
-        nome: "Miguel Couto",
-        status: "finalizado",
-        pacientes: "70/70"
-    },
-    "americas": {
-        nome: "Americas",
-        status: "backlog",
-        pacientes: "0/30"
-    }
-};
+import Velocimetro from "./Velocimetro";
+import data from '../../data/clientes.json';
 
 const Kanban = () => {
-    const statuses = ['backlog', 'calibragem', 'relatório', 'finalizado'];
-    const navigate = useNavigate();
+  const [companies, setCompanies] = useState([]);
 
-    const companiesByStatus = statuses.reduce((acc, status) => {
-        acc[status] = Object.values(COMPANIES).filter(company => company.status === status);
-        return acc;
-    }, {});
+  useEffect(() => {
+    setCompanies(data);
+  }, []);
 
-    const handleColumnClick = (status) => {
-        const paths = {
-            'calibragem': '/calibragem',
-            'relatório': '/relatorio',
-        };
-        navigate(paths[status]);
+  const statuses = ['backlog', 'calibragem', 'relatório', 'finalizado'];
+  const navigate = useNavigate();
+
+  const companiesByStatus = statuses.reduce((acc, status) => {
+    acc[status] = companies.filter(company => company.status === status);
+    return acc;
+  }, {});
+
+  const handleColumnClick = (status) => {
+    const paths = {
+      'calibragem': '/calibragem',
+      'relatório': '/relatorio',
     };
+    navigate(paths[status]);
+  };
 
-    const getCurrentAndTotalPatients = (pacientes) => {
-        const [current, total] = pacientes.split('/').map(Number);
-        return { current, total };
-    };
+  const getCurrentAndTotalPatients = (pacientes) => {
+    const [current, total] = pacientes.split('/').map(Number);
+    return { current, total };
+  };
 
-    return (
-        <ContainerKanban>
-            <div className="kanban-board">
-                {statuses.map((status) => (
-                    <div 
-                        key={status}
-                        className="kanban-column"
-                        onClick={() => handleColumnClick(status)}
-                    >
-                        <h2>{status.toUpperCase()}</h2>
-                        {companiesByStatus[status].map((company) => {
-                            const { current, total } = getCurrentAndTotalPatients(company.pacientes);
-                            return (
-                                <div key={company.nome} className="kanban-task">
-                                    <strong>{company.nome}</strong>
-                                    <p>Pacientes: {company.pacientes}</p>
-                                    <Velocimetro total={total} current={current} />
-                                </div>
-                            );
-                        })}
-                    </div>
-                ))}
-            </div>
-        </ContainerKanban>
-    );
+  return (
+    <ContainerKanban>
+      <div className="kanban-board">
+        {statuses.map((status) => (
+          <div 
+            key={status}
+            className="kanban-column"
+            onClick={() => handleColumnClick(status)}
+          >
+            <h2>{status.toUpperCase()}</h2>
+            {companiesByStatus[status].map((company) => {
+              const { current, total } = getCurrentAndTotalPatients(company.pacientes);
+              return (
+                <div key={company.nome} className="kanban-task">
+                  <strong>{company.nome}</strong>
+                  <p>Pacientes: {company.pacientes}</p>
+                  <Velocimetro total={total} current={current} />
+                </div>
+              );
+            })}
+          </div>
+        ))}
+      </div>
+    </ContainerKanban>
+  );
 };
 
 export default Kanban;
+
