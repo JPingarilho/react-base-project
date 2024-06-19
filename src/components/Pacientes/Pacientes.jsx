@@ -29,7 +29,7 @@ const SearchBar = ({ onSearch }) => {
           type="text"
           value={searchTerm}
           onChange={handleChange}
-          placeholder="Digite o nome da empresa..."
+          placeholder="Digite o nome do cliente..."
           style={{ marginRight: '10px' }}
         />
         <DownloadButton type="submit">Buscar</DownloadButton>
@@ -40,21 +40,21 @@ const SearchBar = ({ onSearch }) => {
 
 const App = () => {
   const empresasCadastradas = [
-    { id: 1, empresa: 'Empresa 1' },
-    { id: 2, empresa: 'Empresa 2' },
-    { id: 3, empresa: 'Empresa 3' },
+    { id: 1, empresa: 'Cliente 1' },
+    { id: 2, empresa: 'Cliente 2' },
+    { id: 3, empresa: 'Cliente 3' },
   ];
 
   const pendingDownloads = [
-    { id: 1, paciente: 'Paciente 1' },
-    { id: 2, paciente: 'Paciente 2' },
-    { id: 3, paciente: 'Paciente 3' },
+    { id: 1, paciente: 'Cliente 1' },
+    { id: 2, paciente: 'Cliente 2' },
+    { id: 3, paciente: 'Cliente 3' },
   ];
 
   const finalizedDownloads = [
-    { id: 4, paciente: 'Paciente 4' },
-    { id: 5, paciente: 'Paciente 5' },
-    { id: 6, paciente: 'Paciente 6' },
+    { id: 4, paciente: 'cliente 4' },
+    { id: 5, paciente: 'cliente 5' },
+    { id: 6, paciente: 'cliente 6' },
   ];
 
   const [searchResult, setSearchResult] = useState(null);
@@ -86,7 +86,7 @@ const App = () => {
           <SearchBar onSearch={handleSearch} />
           <DownloadsContainer>
             <SectionContainer>
-              <h2>Empresas Cadastradas</h2>
+              <h2>Clientes Cadastrados</h2>
               <DownloadsList>
                 {empresasCadastradas.map((empresa) => (
                   <DownloadItem key={empresa.id}>
@@ -101,7 +101,7 @@ const App = () => {
       )}
       {view === 'downloads' && (
         <>
-          <h1>Downloads Pacientes</h1>
+          <h1>Downloads serviços</h1>
           <DownloadsContainer>
             <SectionContainer>
               <h2>Downloads Pendentes</h2>

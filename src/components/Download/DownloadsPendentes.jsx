@@ -3,11 +3,11 @@ import { style } from './Style';
 
 const DownloadsPendentes = () => {
   const [downloads, setDownloads] = useState([
-    { nome: 'Empresa X', status: 'Pendente' },
-    { nome: 'Empresa Y', status: 'Pendente' },
-    { nome: 'Empresa Z', status: 'Pendente' },
-    { nome: 'Empresa W', status: 'Pendente' },
-    { nome: 'Empresa V', status: 'Pendente' },
+    { nome: 'cliente X', status: 'Pendente' },
+    { nome: 'cliente Y', status: 'Pendente' },
+    { nome: 'Cliente Z', status: 'Pendente' },
+    { nome: 'Cliente W', status: 'Pendente' },
+    { nome: 'Cliente V', status: 'Pendente' },
   ]);
 
   const iniciarDownload = (nomeEmpresa) => {
@@ -24,7 +24,7 @@ const DownloadsPendentes = () => {
     <div>
       <h1 style={{ textAlign: 'center', marginTop: '20px', marginBottom: '20px' }}>Download de Calibragem</h1>
       <div className="pesquisa" style={style.pesquisa}>
-        <input type="text" placeholder="Digite o nome da empresa..." style={style.searchBar} />
+        <input type="text" placeholder="Digite o nome do cliente..." style={style.searchBar} />
         <button style={style.searchButton} onClick={pesquisar}>Pesquisar</button>
       </div>
       <div className="downloads-pendentes" style={style.container}>

@@ -3,6 +3,7 @@ import { ContainerKanban } from './Style';
 import { useNavigate } from 'react-router-dom';
 import Velocimetro from "./Velocimetro.js"
 
+
 const COMPANIES = {
     "copa dor": {
         nome: "Copa D'Or",

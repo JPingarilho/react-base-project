@@ -20,10 +20,10 @@ const Relatorio = () => {
       <h1>Anexar Relatório Médico</h1>
 
       <form onSubmit={handleSubmit}>
-        <Label>Nome da Empresa:</Label>
+        <Label>Cliente:</Label>
         <Input type="text" value={nomePaciente} onChange={(e) => setNomePaciente(e.target.value)} />
 
-        <Label>Tipo de Relatório:</Label>
+        <Label>Tipo de serviço:</Label>
         <select value={tipoRelatorio} onChange={(e) => setTipoRelatorio(e.target.value)}>
           <option value="">Selecione</option>
           <option value="exames">Exames</option>

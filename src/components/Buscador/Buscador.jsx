@@ -5,27 +5,27 @@ const COMPANIES = {
   "copa dor": {
     nome: "Copa D'Or",
     status: "calibragem",
-    pacientes: "23/70"
+    serviços: "23/70"
   },
   "cdpi": {
     nome: "CDPI",
     status: "relatório",
-    pacientes: "52/80"
+    serviços: "52/80"
   },
   "barra dor": {
     nome: "Barra D'Or",
     status: "calibragem",
-    pacientes: "69/90"
+    serviços: "69/90"
   },
   "miguel couto": {
     nome: "Miguel Couto",
     status: "finalizado",
-    pacientes: "70/70"
+    serviços: "70/70"
   },
   "americas": {
     nome: "Americas",
     status: "backlog",
-    pacientes: "0/30"
+    serviços: "0/30"
   }
 };
 
@@ -60,7 +60,7 @@ const SearchParams = () => {
               onChange={(e) => setCompany(e.target.value)}
               id="company"
               value={company}
-              placeholder="Digite o nome da empresa"
+              placeholder="Digite o nome do cliente..."
             />
           </label>
           <button type="submit">Pesquisar</button>
@@ -72,7 +72,7 @@ const SearchParams = () => {
               <tr>
                 <th>Nome</th>
                 <th>Status</th>
-                <th>Pacientes</th>
+                <th>serviços</th>
               </tr>
             </thead>
             <tbody>
