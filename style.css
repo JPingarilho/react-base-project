@@ -11,6 +11,8 @@
   --secundaria: #f4f4f4;
   --destaque:#043454;
   --detalhe: hsla(9, 63%, 45%, 1);
+  --header-bg: #a9a9a9; /* Nova variável para o fundo do header */
+
 
 
 /*  --primaria: hsla(0, 1%, 20%, 1);
