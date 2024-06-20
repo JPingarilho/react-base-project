@@ -1,40 +1,89 @@
 import React, { useState, useEffect } from 'react';
-import { style } from './Style';
-import clientesData from '../../data/clientes.json';  // Import the JSON data
+import { style } from '../Download/Style';
 
 const DownloadsPendentes = () => {
   const [clientes, setClientes] = useState([]);
   const [filteredClientes, setFilteredClientes] = useState([]);
 
   useEffect(() => {
-    // Filter clients with status "calibragem" and set their status to "Pendente"
-    const pendingDownloads = clientesData
-      .filter(cliente => cliente.status === 'calibragem')
-      .map(cliente => ({ ...cliente, status: 'Pendente' }));
+    const fetchClientes = async () => {
+      try {
+        const response = await fetch('https://backend-react-based-project-1c2b661fb7ab.herokuapp.com/data/clientes');
+        if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
+        }
+        const data = await response.json();
+        console.log('Fetched data:', data);  // Debugging log
+        
+        // Filter clients with status 'calibragem' and set status to 'Pendente'
+        const calibragemClientes = data
+          .filter(cliente => cliente.status === 'calibragem')
+          .map(cliente => ({ ...cliente, status: 'Pendente' }));
 
-    setClientes(pendingDownloads);
-    setFilteredClientes(pendingDownloads); // Initialize filteredClientes with all data
+        console.log('Calibragem clients:', calibragemClientes);  // Debugging log
+        setClientes(calibragemClientes);
+        setFilteredClientes(calibragemClientes); // Initialize filteredClientes with filtered data
+
+        // Save the initial state to local storage
+        localStorage.setItem('clientes', JSON.stringify(calibragemClientes));
+      } catch (error) {
+        console.error('Error fetching JSON file:', error);
+      }
+    };
+
+    fetchClientes();
   }, []);
 
-  const iniciarDownload = (nomeEmpresa) => {
-    const updatedClientes = clientes.map(cliente => {
-      if (cliente.nome === nomeEmpresa && cliente.status === 'Pendente') {
-        // Trigger the file download
-        const link = document.createElement('a');
-        link.href = cliente.calibragem;
-        link.download = cliente.calibragem.split('/').pop();
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+  const iniciarDownload = async (cliente) => {
+    // Trigger the file download using window.open
+    window.open(`https://backend-react-based-project-1c2b661fb7ab.herokuapp.com${cliente.calibragem}`, '_blank');
 
-        // Update the status
-        return { ...cliente, status: 'feito' };
+    const updatedClientes = clientes.map(c => {
+      if (c.id === cliente.id && c.status === 'Pendente') {
+        // Update the status locally
+        const updatedCliente = { ...c, status: 'download' };
+        updateLocalStorage(updatedCliente);
+
+        // Update the status in the SQLite database
+        updateStatusOnServer(updatedCliente);
+
+        return updatedCliente;
       }
-      return cliente;
+      return c;
     });
 
+    console.log('Updated clients after download:', updatedClientes);  // Debugging log
     setClientes(updatedClientes);
     setFilteredClientes(updatedClientes);
+  };
+
+  const updateLocalStorage = (updatedCliente) => {
+    const clientesFromStorage = JSON.parse(localStorage.getItem('clientes')) || [];
+    const updatedClientesFromStorage = clientesFromStorage.map(cliente =>
+      cliente.id === updatedCliente.id ? updatedCliente : cliente
+    );
+    localStorage.setItem('clientes', JSON.stringify(updatedClientesFromStorage));
+  };
+
+  const updateStatusOnServer = async (updatedCliente) => {
+    try {
+      const response = await fetch(`https://backend-react-based-project-1c2b661fb7ab.herokuapp.com/data/clientes/${updatedCliente.id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ status: updatedCliente.status }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const result = await response.text();
+      console.log(result);
+    } catch (error) {
+      console.error('Error updating status on server:', error);
+    }
   };
 
   const pesquisar = (event) => {
@@ -66,7 +115,12 @@ const DownloadsPendentes = () => {
                 <span style={style.name}>{cliente.nome}:</span>
                 <span style={style.status}>{cliente.status}</span>
                 {cliente.status === 'Pendente' && (
-                  <button style={style.button} onClick={() => iniciarDownload(cliente.nome)}>Iniciar</button>
+                  <button 
+                    style={style.button} 
+                    onClick={() => iniciarDownload(cliente)}
+                  >
+                    Iniciar
+                  </button>
                 )}
               </div>
             </li>
@@ -78,3 +132,5 @@ const DownloadsPendentes = () => {
 };
 
 export default DownloadsPendentes;
+
+

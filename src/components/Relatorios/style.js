@@ -1,57 +1,81 @@
 import styled from "styled-components";
 
-const FormContainer = styled.div`
-  width: 100%;
-  max-width: 1000px;
-  margin: 50px auto; /* Reduzi a margem superior para 50px */
-  padding: 40px;
-  border: 1px solid #e3e3e3;
+const ContainerRelatorios = styled.article`
+font-family: 'Arial, sans-serif';
+text-align: center;
+padding: 20px;
+
+.search-bar-container {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.downloads-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.section-container {
+  width: 90%;
+  padding: 30px;
+  background-color: #ffffff;
   border-radius: 35px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
-`;
-
-const Label = styled.label`
-  display: block;
-  margin-bottom: 5px;
-  margin-top: 7px;
-  font-size: 1rem;
-  font-weight: bold;
-  color: #333;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  padding: 12px;
   margin-bottom: 20px;
-  margin-top: 20px;
+  border: 1px solid #e3e3e3;
+}
+
+.downloads-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.download-item {
+  margin-bottom: 10px;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  box-sizing: border-box;
-  font-size: 1rem;
-  transition: border-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-  &:focus {
-    border-color: #007bff;
-    outline: none;
-  }
-`;
-
-const Button = styled.button`
-  width: 100%;
-  padding: 14px;
-  margin-top: 40px;
+.download-button {
   background-color: var(--primaria);
   color: #fff;
   border: none;
   border-radius: 5px;
-  font-size: 1.125rem;
+  padding: 10px 20px;
   cursor: pointer;
-  transition: background-color 0.3s;
-
   &:hover {
     background-color: #0056b3;
   }
+}
+
+.styled-input {
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.search-button {
+  background-color: var(--primaria);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10px 20px;
+  cursor: pointer;
+  &:hover {
+    background-color: #0056b3;
+  }
+}
 `;
 
-export { FormContainer, Label, Input, Button };
+export { ContainerRelatorios };
