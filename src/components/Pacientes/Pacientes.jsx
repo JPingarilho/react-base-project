@@ -1,14 +1,5 @@
-import React, { useState } from 'react';
-import {
-  AppContainer,
-  SearchBarContainer,
-  DownloadsContainer,
-  SectionContainer,
-  DownloadsList,
-  DownloadItem,
-  DownloadButton,
-  StyledInput
-} from './style'; 
+import React, { useState, useEffect } from 'react';
+import { ContainerPacientes } from './Style';
 
 const SearchBar = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -23,116 +14,181 @@ const SearchBar = ({ onSearch }) => {
   };
 
   return (
-    <SearchBarContainer>
+    <div className="search-bar-container">
       <form onSubmit={handleSubmit} style={{ display: 'flex', alignItems: 'center' }}>
-        <StyledInput
+        <input
           type="text"
           value={searchTerm}
           onChange={handleChange}
-          placeholder="Digite o nome da empresa..."
+          placeholder="Digite o nome do cliente..."
+          className="styled-input"
           style={{ marginRight: '10px' }}
         />
-        <DownloadButton type="submit">Buscar</DownloadButton>
+        <button type="submit" className="search-button">Buscar</button>
       </form>
-    </SearchBarContainer>
+    </div>
   );
 };
 
 const App = () => {
-  const empresasCadastradas = [
-    { id: 1, empresa: 'Empresa 1' },
-    { id: 2, empresa: 'Empresa 2' },
-    { id: 3, empresa: 'Empresa 3' },
-  ];
-
-  const pendingDownloads = [
-    { id: 1, paciente: 'Paciente 1' },
-    { id: 2, paciente: 'Paciente 2' },
-    { id: 3, paciente: 'Paciente 3' },
-  ];
-
-  const finalizedDownloads = [
-    { id: 4, paciente: 'Paciente 4' },
-    { id: 5, paciente: 'Paciente 5' },
-    { id: 6, paciente: 'Paciente 6' },
-  ];
-
+  const [companies, setCompanies] = useState([]);
   const [searchResult, setSearchResult] = useState(null);
-  const [view, setView] = useState('home'); // Estado para controlar a visualização
+  const [view, setView] = useState('home');
+  const [selectedCompany, setSelectedCompany] = useState(null);
+  const [downloadedPatients, setDownloadedPatients] = useState([]);
+
+  useEffect(() => {
+    const fetchCompanies = async () => {
+      try {
+        const response = await fetch('https://backend-react-based-project-1c2b661fb7ab.herokuapp.com/data/clientes');
+        if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
+        }
+        const data = await response.json();
+        setCompanies(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchCompanies();
+  }, []);
 
   const handleSearch = (searchTerm) => {
-    const found = empresasCadastradas.find(empresa => empresa.empresa.toLowerCase() === searchTerm.toLowerCase());
+    const found = companies.find(company => company.nome.toLowerCase() === searchTerm.toLowerCase() && company.status === 'download');
     if (found) {
       setSearchResult({ data: found });
     } else {
       setSearchResult({ type: 'notFound' });
     }
-    setView('results'); // Muda a visualização para resultados
+    setView('results');
   };
 
-  const handleVisualizar = () => {
-    setView('downloads');
+  const handleVisualizar = (company) => {
+    setSelectedCompany(company);
+    const initialDownloadedPatients = Array.from({ length: company.downloads }, (_, i) => i); // Initialize downloaded patients based on the number of downloads
+    setDownloadedPatients(initialDownloadedPatients);
+    setView('pacientes');
   };
 
   const handleVoltar = () => {
     setView('home');
   };
 
+  const handleDownload = async (companyId, pacienteIndex) => {
+    alert(`Downloading Paciente ${pacienteIndex + 1}`);
+    // Implement actual download logic here
+
+    try {
+      const response = await fetch(`https://backend-react-based-project-1c2b661fb7ab.herokuapp.com/update-downloads/${companyId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+
+      // Update the local state to reflect the downloaded patient
+      setDownloadedPatients(prev => [...prev, pacienteIndex]);
+
+      const updatedCompanies = companies.map(company => {
+        if (company.id === companyId) {
+          return { ...company, downloads: company.downloads + 1 };
+        }
+        return company;
+      });
+
+      setCompanies(updatedCompanies);
+    } catch (error) {
+      console.error('Error updating downloads:', error);
+    }
+  };
+
+  const handleConcluirCliente = async (companyId) => {
+    try {
+      const response = await fetch(`https://backend-react-based-project-1c2b661fb7ab.herokuapp.com/update-status-relatorio/${companyId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+
+      const updatedCompanies = companies.map(company => {
+        if (company.id === companyId) {
+          return { ...company, status: 'relatório' };
+        }
+        return company;
+      });
+
+      setCompanies(updatedCompanies);
+      setView('home'); // Navigate back to home after concluding
+    } catch (error) {
+      console.error('Error updating status to relatório:', error);
+    }
+  };
+
+  const companiesInDownload = companies.filter(company => company.status === 'download');
+
   return (
-    <AppContainer>
+    <ContainerPacientes>
       {view === 'home' && (
         <>
-          <h1></h1>
+          <h1>Download de Pacientes</h1>
           <SearchBar onSearch={handleSearch} />
-          <DownloadsContainer>
-            <SectionContainer>
-              <h2>Empresas Cadastradas</h2>
-              <DownloadsList>
-                {empresasCadastradas.map((empresa) => (
-                  <DownloadItem key={empresa.id}>
-                    <span>{empresa.empresa}</span>
-                    <DownloadButton onClick={handleVisualizar}>Visualizar</DownloadButton>
-                  </DownloadItem>
+          <div className="downloads-container">
+            <div className="section-container">
+              <h2>Clientes com Download</h2>
+              <ul className="downloads-list">
+                {companiesInDownload.map((company) => (
+                  <li key={company.id} className="download-item">
+                    <span>{company.nome}</span>
+                    <button className="download-button" onClick={() => handleVisualizar(company)}>Visualizar</button>
+                  </li>
                 ))}
-              </DownloadsList>
-            </SectionContainer>
-          </DownloadsContainer>
+              </ul>
+            </div>
+          </div>
         </>
       )}
-      {view === 'downloads' && (
+      {view === 'pacientes' && selectedCompany && (
         <>
-          <h1>Downloads Pacientes</h1>
-          <DownloadsContainer>
-            <SectionContainer>
-              <h2>Downloads Pendentes</h2>
-              <DownloadsList>
-                {pendingDownloads.map((download) => (
-                  <DownloadItem key={download.id}>
-                    <span>{download.paciente}</span>
-                    <DownloadButton>Iniciar</DownloadButton>
-                  </DownloadItem>
+          <h1>Pacientes de {selectedCompany.nome}</h1>
+          <div className="downloads-container">
+            <div className="section-container">
+              <h2>Pacientes</h2>
+              <ul className="downloads-list">
+                {Array.from({ length: selectedCompany.pacientes }, (_, i) => (
+                  <li key={i} className="download-item">
+                    <span>Paciente {i + 1}</span>
+                    <button 
+                      className="download-button" 
+                      onClick={() => handleDownload(selectedCompany.id, i)}
+                      disabled={downloadedPatients.includes(i)}
+                    >
+                      {downloadedPatients.includes(i) ? 'Concluido' : 'Download'}
+                    </button>
+                  </li>
                 ))}
-              </DownloadsList>
-            </SectionContainer>
-            <SectionContainer>
-              <h2>Downloads Finalizados</h2>
-              <DownloadsList>
-                {finalizedDownloads.map((download) => (
-                  <DownloadItem key={download.id}>
-                    <span>{download.paciente}</span>
-                    <DownloadButton>Iniciar</DownloadButton>
-                  </DownloadItem>
-                ))}
-              </DownloadsList>
-            </SectionContainer>
-          </DownloadsContainer>
-          <DownloadButton onClick={handleVoltar}>Voltar</DownloadButton>
+              </ul>
+              {downloadedPatients.length === selectedCompany.pacientes && (
+                <button className="download-button" onClick={() => handleConcluirCliente(selectedCompany.id)}>Concluir Cliente</button>
+              )}
+            </div>
+          </div>
+          <button className="download-button" onClick={handleVoltar}>Voltar</button>
         </>
       )}
       {view === 'results' && (
         <>
           <SearchBar onSearch={handleSearch} />
-          <DownloadButton onClick={handleVoltar}>Voltar</DownloadButton>
+          <button className="download-button" onClick={handleVoltar}>Voltar</button>
           {searchResult && searchResult.type === 'notFound' && (
             <div>
               <h2>Empresa não encontrada</h2>
@@ -141,15 +197,15 @@ const App = () => {
           {searchResult && searchResult.type !== 'notFound' && (
             <div>
               <h2>Resultado da Busca:</h2>
-              <DownloadItem>
-                <span>{searchResult.data.empresa}</span>
-                <DownloadButton onClick={handleVisualizar}>Visualizar</DownloadButton>
-              </DownloadItem>
+              <li className="download-item">
+                <span>{searchResult.data.nome}</span>
+                <button className="download-button" onClick={() => handleVisualizar(searchResult.data)}>Visualizar</button>
+              </li>
             </div>
           )}
         </>
       )}
-    </AppContainer>
+    </ContainerPacientes>
   );
 };
 
