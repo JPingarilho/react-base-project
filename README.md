@@ -24,6 +24,10 @@ O comando de execução local do projeto de ver executado no diretório raiz e d
 
 Utilize o comando `npm run build` para construir uma versão pronta para produção. Os arquivos dessa versão estarão disponíveis na pasta *build*.
 
+## Backend 
+
+Para rodar o projeto é nescessario rodar o backend do mesmo que pode ser encontrado no repositorio [backen-react-based-project](https://github.com/marceufilho/backend-react-based-project)
+
 ## Site de Organização do Projeto
 
 - [Trello](https://trello.com/b/zCc8e2ry/ap1)
